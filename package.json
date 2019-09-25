@@ -1,0 +1,15 @@
+{
+  "name": "ziv-vue",
+  "version": "1.0.0",
+  "description": "personal vue components",
+  "main": "./packages/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "vue",
+    "components"
+  ],
+  "author": "ziv kuo",
+  "license": "MIT"
+}
