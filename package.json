@@ -8,8 +8,9 @@
   },
   "keywords": [
     "vue",
-    "components"
+    "vue-components"
   ],
   "author": "ziv kuo",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": "https://github.com/gxsandzxl/ziv-vue"
 }
