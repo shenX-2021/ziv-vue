@@ -1,6 +1,9 @@
-import Vue from 'vue';
-import Toast from './toast/toast';
+import {Toast} from './mobile/index';
+
+const mobile = {
+  Toast
+}
 
 export {
-  Toast
+  mobile
 }

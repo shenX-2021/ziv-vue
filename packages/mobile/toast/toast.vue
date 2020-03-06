@@ -1,14 +1,13 @@
 <template>
-  <transition name="mvue">
-    <div class="mvue-toast" v-show="visible" :class="positionClass">
-      <span class="mvue-toast-text">{{message}}</span>
+  <transition name="toast">
+    <div class="ziv-toast" v-show="visible" :class="positionClass">
+      <span class="ziv-toast-text">{{message}}</span>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
   export default {
-    template: '<div class="mvue-toast">test</div>',
     data () {
       return {
         visible: false
@@ -49,8 +48,8 @@
   }
 </script>
 
-<style lang="less">
-  .mvue-toast {
+<style>
+  .ziv-toast {
     position: fixed;
     max-width: 80%;
     border-radius: 5px;
@@ -63,26 +62,22 @@
     font-size: .9rem;
     transition: opacity .3s linear;
   }
-  .mvue-enter, .mvue-leave-active {
+  .ziv-enter, .ziv-leave-active {
     opacity: 0;
   }
   .is-top {
     top: 50px;
     left: 50%;
     transform: translate(-50%);
-    // margin-left: -50%;
   }
   .is-middle {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    // margin-left: -50%;
-    // margin-top: -50%;
   }
   .is-bottom {
     bottom: 50px;
     left: 50%;
     transform: translate(-50%);
-    // margin-left: -50%;
   }
 </style>

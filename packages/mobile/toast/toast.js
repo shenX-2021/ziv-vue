@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import toastVue from './toast.vue';
-import { visitEachChild } from 'typescript';
 
 const ToastConstructor = Vue.extend(toastVue);
 let instancePool = [];
@@ -31,8 +30,8 @@ ToastConstructor.prototype.close = function () {
 }
 
 let Toast = (opt = {}) => {
-  return new Promise((resolve, reject) => {
-    let duration = opt.duration || 3000;
+  return new Promise((resolve) => {
+    let duration = opt.duration || 1500;
     
     let instance = getAnInstance();
     instance.closed = false;
