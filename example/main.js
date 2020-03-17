@@ -3,11 +3,14 @@ import App from './App.vue'
 import router from './router'
 
 import {mobile} from '../packages/index';
-const {Toast} = mobile;
+const {Toast, TabContainer} = mobile;
 
 Vue.mixin({
   methods: {
     $toast: Toast
+  },
+  components: {
+    TabContainer
   }
 })
 

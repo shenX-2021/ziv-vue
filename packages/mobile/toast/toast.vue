@@ -1,5 +1,5 @@
 <template>
-  <transition name="toast">
+  <transition name="ziv">
     <div class="ziv-toast" v-show="visible" :class="positionClass">
       <span class="ziv-toast-text">{{message}}</span>
     </div>

@@ -3,7 +3,8 @@
     <div class="option-box">
       <div class="option">
         PC端
-      </div><router-link to="/mobile">
+      </div>
+      <router-link to="/mobile">
         <div class="option">
           移动端        
         </div>

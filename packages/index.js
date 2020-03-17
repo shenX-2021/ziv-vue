@@ -1,7 +1,8 @@
-import {Toast} from './mobile/index';
+import {Toast, TabContainer} from './mobile/index';
 
 const mobile = {
-  Toast
+  Toast,
+  TabContainer
 }
 
 export {
