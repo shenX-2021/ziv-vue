@@ -116,7 +116,7 @@ export default {
   width: 100%;
   height: 6%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.14);
-  font-size: .75rem;
+  font-size: 1.6rem;
   box-sizing: border-box;
   position: relative;
 }
@@ -160,9 +160,9 @@ export default {
   box-sizing: border-box;
   padding-bottom: 2vh;
 }
-/* .content-box .content-list::after {
+.content-box .content-list::after {
   display: block;
   content: '';
   clear: both;
-} */
+}
 </style>

@@ -4,11 +4,9 @@
       <div class="option" @click="toLink('/pc')">
         PC端
       </div>
-      <router-link to="/mobile">
-        <div class="option">
-          移动端        
-        </div>
-      </router-link>
+      <div class="option" @click="toLink('/mobile')">
+        移动端        
+      </div>
     </div>
   </div>
 </template>
@@ -20,7 +18,8 @@ export default {
   name: 'Home',
   methods: {
     toLink (path) {
-      if (path === '/pc') return this.$toast('PC端的组件还不存在，要不你先看看移动端？')
+      if (path === '/pc') return this.$toast('PC端的组件还不存在，要不你先看看移动端？');
+      this.$router.push(path);
     }
   }
 }
@@ -30,6 +29,7 @@ export default {
 .home {
   width: 100%;
   height: 100%;
+  text-align: center;
 }
 .option-box {
   position: absolute;

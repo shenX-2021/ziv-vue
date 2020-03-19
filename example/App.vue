@@ -4,6 +4,26 @@
   </div>
 </template>
 
+<script>
+export default {
+  mounted () {
+    document.addEventListener('touchstart',function (event) {  
+      if(event.touches.length>1){  
+        event.preventDefault();  
+      }
+    })  
+    var lastTouchEnd=0;  
+    document.addEventListener('touchend',function (event) {  
+      var now=(new Date()).getTime();  
+      if(now-lastTouchEnd<=300){  
+        event.preventDefault();  
+      }  
+      lastTouchEnd=now;  
+    },false)  
+  }
+}
+</script>
+
 <style>
 html, body {
   width: 100%;
@@ -15,7 +35,6 @@ html, body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   width: 100%;
   height: 100%;

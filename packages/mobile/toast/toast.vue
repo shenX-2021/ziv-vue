@@ -59,7 +59,7 @@
     box-sizing: border-box;
     text-align: center;
     z-index: 1000;
-    font-size: .9rem;
+    font-size: 1.6rem;
     transition: opacity .3s linear;
   }
   .ziv-enter, .ziv-leave-active {

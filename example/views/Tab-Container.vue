@@ -1,6 +1,7 @@
 <template>
   <div class="tab-container">
-    <TabContainer :navList="navList" navClass="nav">
+    <Top @back="back" :height="headHeight"></Top>
+    <TabContainer :navList="navList" navClass="nav" :style="`height: ${tabContainerHeight}px;`">
       <div :slot="`content${index}`" v-for="(listItem, index) in list" :key="index">
         <div class="content-item" v-for="(item, idx) in listItem" :key="idx">
           <div class="img-box">
@@ -16,6 +17,7 @@
 export default {
   data () {
     return {
+      headHeight: 0,
       navList: ['tab0', 'tab1', 'tab2'],
       list: [
         [
@@ -262,6 +264,14 @@ export default {
     }
   },
   methods: {
+    back () {
+      this.$router.back();
+    }
+  },
+  created () {
+    let htmlHeight = document.documentElement.offsetHeight;
+    this.headHeight = htmlHeight * 6 / 100;
+    this.tabContainerHeight = htmlHeight - this.headHeight;
   }
 }
 </script>
@@ -293,7 +303,7 @@ export default {
   border-top-right-radius: 4px;
 }
 .content-box .content-item .title {
-  font-size: .55rem;
+  font-size: 1.6rem;
   margin: .4rem .4rem;
   line-height: 1rem;
   word-break: break-all;

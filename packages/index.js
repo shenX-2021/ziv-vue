@@ -1,9 +1,4 @@
-import {Toast, TabContainer} from './mobile/index';
-
-const mobile = {
-  Toast,
-  TabContainer
-}
+import mobile from './mobile/index';
 
 export {
   mobile
