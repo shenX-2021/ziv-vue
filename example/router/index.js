@@ -18,12 +18,12 @@ const routes = [
   {
     path: '/tab-container',
     name: 'Tab-Container',
-    component: () => import(/* webpackChunkName: "sign" */ '../views/Tab-Container.vue')
+    component: () => import(/* webpackChunkName: "tab-container" */ '../views/Tab-Container.vue')
   }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="option-box">
-      <div class="option">
+      <div class="option" @click="toLink('/pc')">
         PC端
       </div>
       <router-link to="/mobile">
@@ -18,7 +18,10 @@
 
 export default {
   name: 'Home',
-  components: {
+  methods: {
+    toLink (path) {
+      if (path === '/pc') return this.$toast('PC端的组件还不存在，要不你先看看移动端？')
+    }
   }
 }
 </script>

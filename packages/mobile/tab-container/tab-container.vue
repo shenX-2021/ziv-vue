@@ -91,7 +91,6 @@ export default {
       if (this.left + this.listBoxWidth / 2 > 0) this.currentIdx = 0;
       else if (this.left + this.listBoxWidth / 2 > - this.listBoxWidth) this.currentIdx = 1;
       else if (this.left + this.listBoxWidth / 2 > - this.listBoxWidth * 2) this.currentIdx = 2;
-      console.log(this.left, this.left + this.listBoxWidth/ 2, this.listBoxWidth,  Math.abs(parseInt((this.left - this.listBoxWidth/2)/this.listBoxWidth)));
       this.currentIdx = Math.abs(parseInt((this.left - this.listBoxWidth/2)/this.listBoxWidth));
 
       this.left = this.initLeft =   -this.listBoxWidth * this.currentIdx;
