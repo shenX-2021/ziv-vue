@@ -78,7 +78,7 @@ export default {
 
         this.left = e.changedTouches[0].clientX - this.initX;
         if (this.initLeft + this.left > 0) this.left = 0;
-        else if (this.initLeft + this.left < -this.listBoxWidth * 2) this.left = - this.listBoxWidth * 2;
+        else if (this.initLeft + this.left < -this.listBoxWidth * (this.navList.length - 1)) this.left = - this.listBoxWidth * (this.navList.length - 1);
         else this.left = this.left + this.initLeft
       } 
     },

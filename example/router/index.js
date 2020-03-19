@@ -16,9 +16,9 @@ const routes = [
     component: () => import(/* webpackChunkName: "mobile" */ '../views/Mobile.vue')
   },
   {
-    path: '/sign',
-    name: 'Sign',
-    component: () => import(/* webpackChunkName: "sign" */ '../views/Sign.vue')
+    path: '/tab-container',
+    name: 'Tab-Container',
+    component: () => import(/* webpackChunkName: "sign" */ '../views/Tab-Container.vue')
   }
 ]
 
