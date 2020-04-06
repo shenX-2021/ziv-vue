@@ -29,15 +29,27 @@ ToastConstructor.prototype.close = function () {
   returnAnInstance(this);
 }
 
+const initOpt = {
+  duration: 1500,
+  message: '',
+  position: 'middle',
+  className: ''
+}
 let Toast = (opt = {}) => {
   return new Promise((resolve) => {
-    let duration = opt.duration || 1500;
     
     let instance = getAnInstance();
     instance.closed = false;
-    instance.message = typeof opt === 'string' ? opt : opt.message;
-    instance.position = opt.position ? opt.position : 'middle';
-    instance.className = opt.className || '';
+    if (typeof opt === 'object') {
+      instance.message = opt.message;
+      instance.position = opt.position || 'middle';
+      instance.className = opt.className || '';
+    } else {
+      opt = {
+        message: opt
+      }
+    }
+    Object.assign(instance, initOpt, opt);
     clearTimeout(instance.timer);
   
   
@@ -45,11 +57,11 @@ let Toast = (opt = {}) => {
     instance.visible = true;
   
     instance.$el.removeEventListener('transitionend', removeDom);
-    ~duration && (instance.timer = setTimeout(() => {
+    ~instance.duration && (instance.timer = setTimeout(() => {
       if (instance.closed) return resolve();
       instance.close();
       return resolve()
-    }, duration));
+    }, instance.duration));
   })
 }
 

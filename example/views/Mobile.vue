@@ -31,7 +31,7 @@ export default {
       return /Android|webOS|iPhone|iPod|iPad|BlackBerry/i.test(navigator.userAgent);
     },
     toast () {
-      this.$toast({message: '来测试一下ya hadk daklsfjl akdfadsf adsf asdf asdf afd asf da', duration: 1000, position: 'bottom'});
+      this.$toast({message: '来测试一下ya hadk daklsfjl akdfadsf adsf asdf asdf afd asf da', duration: 1000, position: 'middle', className: 'test-class'});
     },
     back () {
       this.$router.back();
@@ -78,5 +78,12 @@ export default {
   font-size: 1.6rem;
   cursor: pointer;
   outline: none;
+}
+</style>
+
+<style >
+.test-class {
+  color: #000;
+  background: #fff;
 }
 </style>
