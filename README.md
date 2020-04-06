@@ -47,7 +47,7 @@ this.$toast({message: 'test class', className: 'test-class'}); // test-class的�
 
 淘宝示例动图：
 
-![淘宝示例](./taobao.gif)
+![淘宝示例](./assets/taobao.gif)
 
 引入组件：
 ```vue

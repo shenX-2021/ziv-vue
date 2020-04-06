@@ -21,22 +21,25 @@ export default {
   name: 'tab-container',
   data () {
     return {
-      navWidth: 0,
-      currentIdx: 0,
-      initX: 0,
-      initY: 0,
-      moveType: 0,
-      slideBoxWidth: 0,
-      listBoxWidth: 0,
-      listBox: null,
-      left: 0,
-      initLeft: 0,
-      isSliding: false
+      navWidth: 0,        // tab的宽度值
+      currentIdx: 0,      // 当前的tab的索引值
+      moveType: 0,        // 移动的type值，1为横向移动，2为纵向移动。初始值为0
+      contentBoxWidth: 0, // 内容区的宽度
+      left: 0,            // 当前的left值
+      initX: 0,           // touchstart时的x坐标
+      initY: 0,           // touchstart时的Y坐标
+      initLeft: 0,        // touchstart时的left值
+      initTime: 0,        // touchstart时的时间点
+      SPEED_LIMIT: 1,     // 速度限制，超过该速度则跳转下一个tab
+      isSliding: false,   // 是否开启滑动动画
+      MOVE_TYPE_ROW: 1,   // 横向滑动的moveType值
+      MOVE_TYPE_COL: 2,   // 纵向滑动的moveType值
     }
   },
   props: {
     navList: {
-      default: []
+      default: [],
+      required: true
     },
     navClass: {
       default: ''
@@ -46,9 +49,7 @@ export default {
     }
   },
   mounted () {
-    this.slideBoxWidth = document.querySelector('.content-box .slide-box').offsetWidth;
-    this.listBox = document.querySelector('.content-box');
-    this.listBoxWidth = this.listBox.offsetWidth;
+    this.contentBoxWidth = document.querySelector('.content-box').offsetWidth;
     this.navWidth = document.getElementsByClassName("nav-item")[0].offsetWidth;
   },
   computed: {
@@ -57,43 +58,56 @@ export default {
     }
   },
   methods: {
+    // 点击tab，改变索引值
     changeIdx (idx) {
       this.currentIdx = idx;
       this.isSliding = true;
-      this.left = this.initLeft =   -this.listBoxWidth * this.currentIdx;
+      this.left = this.initLeft = -this.contentBoxWidth * this.currentIdx;
     },
     touchStart (e) {
       this.isSliding = false
       this.initX = e.changedTouches[0].clientX;
       this.initY = e.changedTouches[0].clientY;
+      this.initTime = Date.now();
     },
     touching (e) {
-      if (this.moveType === 0) {
+      if (this.moveType === 0) { // 判断是横向移动还是纵向移动
         let deltaX = e.changedTouches[0].clientX - this.initX;
         let deltaY = e.changedTouches[0].clientY - this.initY;
-        if (Math.abs(deltaX) > Math.abs(deltaY)) this.moveType = 1;
-        else this.moveType = 2;
-      } else if (this.moveType === 1) {
+        if (Math.abs(deltaX) > Math.abs(deltaY)) this.moveType = this.MOVE_TYPE_ROW;
+        else this.moveType = this.MOVE_TYPE_COL;
+      } else if (this.moveType === this.MOVE_TYPE_ROW) { // 横向移动
         e.preventDefault();
 
         this.left = e.changedTouches[0].clientX - this.initX;
+        // 限制横向移动不要超出范围
         if (this.initLeft + this.left > 0) this.left = 0;
-        else if (this.initLeft + this.left < -this.listBoxWidth * (this.navList.length - 1)) this.left = - this.listBoxWidth * (this.navList.length - 1);
+        else if (this.initLeft + this.left < -this.contentBoxWidth * (this.navList.length - 1)) this.left = - this.contentBoxWidth * (this.navList.length - 1);
         else this.left = this.left + this.initLeft
       } 
     },
-    touchEnd () {
+    touchEnd (e) {
+      if (this.moveType === this.MOVE_TYPE_ROW) {
+        // 计算滑动速度
+        let ms = Date.now() - this.initTime;
+        let left = e.changedTouches[0].clientX - this.initX;
+        let speed = left / ms;
+        if (speed > this.SPEED_LIMIT) { // 右滑速度超过限制，左移一个tab
+          this.currentIdx--;
+          if (this.currentIdx < 0) this.currentIdx = 0;
+        } else if (speed < -this.SPEED_LIMIT) { // 左滑速度超过限制，右移一个tab
+          this.currentIdx++;
+          if (this.currentIdx > this.navList.length - 1) this.currentIdx = this.navList.length - 1;
+        } else { // 移动距离超过半个tab，跳到下一个tab
+          this.currentIdx = Math.abs(parseInt((this.left - this.contentBoxWidth / 2) / this.contentBoxWidth));
+
+        }
+        this.left = this.initLeft = -this.contentBoxWidth * this.currentIdx;
+      }
+      // 恢复默认值
       this.isSliding = true;
       this.moveType = 0;
       this.initLeft = this.left;
-
-      
-      if (this.left + this.listBoxWidth / 2 > 0) this.currentIdx = 0;
-      else if (this.left + this.listBoxWidth / 2 > - this.listBoxWidth) this.currentIdx = 1;
-      else if (this.left + this.listBoxWidth / 2 > - this.listBoxWidth * 2) this.currentIdx = 2;
-      this.currentIdx = Math.abs(parseInt((this.left - this.listBoxWidth/2)/this.listBoxWidth));
-
-      this.left = this.initLeft =   -this.listBoxWidth * this.currentIdx;
     },
     scroll (e) {
       e.preventDefault();
